@@ -45,32 +45,56 @@ final class ProductCell: UICollectionViewCell {
         favoriteButton.isUserInteractionEnabled = false // not tappable in this example
 
         [imageView, titleLabel, priceLabel, favoriteButton].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview($0)
         }
     }
 
     private func setupLayout() {
-        NSLayoutConstraint.activate([
-            favoriteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            favoriteButton.widthAnchor.constraint(equalToConstant: 24),
-            favoriteButton.heightAnchor.constraint(equalToConstant: 24),
-
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-            imageView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 4/3),
-
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-
-            priceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 6),
-            priceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            priceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            priceLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -10)
-        ])
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        // ✅ Manual frame layout for maximum performance
+        let bounds = contentView.bounds
+        let imageHeight = bounds.width * 4/3
+        
+        // Favorite button - top right corner
+        favoriteButton.frame = CGRect(
+            x: bounds.width - 34, 
+            y: 10, 
+            width: 24, 
+            height: 24
+        )
+        
+        // Image view - full width, 4:3 aspect ratio
+        imageView.frame = CGRect(
+            x: 0, 
+            y: 0, 
+            width: bounds.width, 
+            height: imageHeight
+        )
+        
+        // Title label - below image with margins
+        let titleY = imageHeight + 8
+        let labelWidth = bounds.width - 20
+        let titleHeight: CGFloat = 44 // Enough for 2 lines
+        titleLabel.frame = CGRect(
+            x: 10, 
+            y: titleY, 
+            width: labelWidth, 
+            height: titleHeight
+        )
+        
+        // Price label - below title
+        let priceY = titleY + titleHeight + 6
+        let priceHeight: CGFloat = 22 // Single line
+        priceLabel.frame = CGRect(
+            x: 10, 
+            y: priceY, 
+            width: labelWidth, 
+            height: priceHeight
+        )
     }
 
     func configure(with product: Product) {
