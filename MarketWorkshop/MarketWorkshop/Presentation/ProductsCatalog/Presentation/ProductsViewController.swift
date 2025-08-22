@@ -27,6 +27,9 @@ final class ProductsViewController: UIViewController {
     private var cellSizeCache: [IndexPath: CGSize] = [:]
     private var rowHeights: [Int: CGFloat] = [:]
     
+    private var standardCellSize: CGSize?
+    private var currentViewWidth: CGFloat = 0
+    
     private let performanceManager = PerformanceMetricManager.shared
 
     private lazy var categoriesScrollView: UIScrollView = {
@@ -181,18 +184,39 @@ final class ProductsViewController: UIViewController {
         self.searchTextField = searchTextField
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // Invalidate cache on layout changes (device rotation, etc.)
+        let newWidth = view.frame.width
+        if currentViewWidth != 0 && currentViewWidth != newWidth {
+            invalidateSizeCache()
+        }
+    }
+    
     @objc private func refreshData() {
         isRefreshing = true
         presenter.loadProducts(refresh: true)
+    }
+    
+    // MARK: - Size Cache Management
+    private func invalidateSizeCache() {
+        cellSizeCache.removeAll()
+        rowHeights.removeAll()
+        standardCellSize = nil
+        currentViewWidth = 0
     }
 }
 
 // MARK: - ProductsView Protocol Conformance
 extension ProductsViewController: ProductsView {
     func show(products: [Product]) {
+        let oldCount = self.products.count
         self.products = products
-        cellSizeCache.removeAll()
-        rowHeights.removeAll()
+        
+        if abs(products.count - oldCount) > 10 || oldCount == 0 {
+            invalidateSizeCache()
+        }
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()
@@ -269,10 +293,21 @@ extension ProductsViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: collectionView.bounds.width - 32, height: 80)
         }
         
-        let width = (view.frame.width - 48) / 2
-        let height = width * 4/3 + 60
+        if let cachedSize = cellSizeCache[indexPath] {
+            return cachedSize
+        }
         
-        return CGSize(width: width, height: height)
+        let viewWidth = view.frame.width
+        if standardCellSize == nil || currentViewWidth != viewWidth {
+            currentViewWidth = viewWidth
+            let width = (viewWidth - 48) / 2
+            let height = width * 4/3 + 60
+            standardCellSize = CGSize(width: width, height: height)
+        }
+        
+        let size = standardCellSize!
+        cellSizeCache[indexPath] = size
+        return size
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
