@@ -25,7 +25,7 @@ class LightWeightAssembly: Assembly {
             )
         }
 
-        register(lifetime: .prototype) { [weak self] () -> APIClient in
+        register(lifetime: .singleton(lazy: true)) { [weak self] () -> APIClient in
             guard let self = self else { preconditionFailure("Assembly released") }
             return APIClient(
                 urlSession: self.resolve()
