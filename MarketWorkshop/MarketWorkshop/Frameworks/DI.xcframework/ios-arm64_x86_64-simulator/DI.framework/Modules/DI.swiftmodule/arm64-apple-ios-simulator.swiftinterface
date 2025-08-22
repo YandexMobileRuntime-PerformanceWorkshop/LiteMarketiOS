@@ -1,0 +1,48 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
+// swift-module-flags: -target arm64-apple-ios17.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name DI
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+import Foundation
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+final public class RWLock {
+  public init()
+  @objc deinit
+  final public func lockReading()
+  final public func lockWriting()
+  final public func unlock()
+}
+@objc @_inheritsConvenienceInitializers open class Assembly : ObjectiveC.NSObject {
+  final public func register<ComponentType>(lifetime: DI.Assembly.Lifetime = .singleton(lazy: true), initCall: @escaping () -> ComponentType, injectCall: ((ComponentType) -> Swift.Void)? = nil)
+  final public func scopeWith<T>(overrides: [DI.Assembly.ScopeOverride], scope: () -> T) -> T
+  final public func unregister<ComponentType>(type: ComponentType.Type)
+  final public func resolve<ComponentType>() -> ComponentType!
+  public func resolve(instance: Any)
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension DI.Assembly {
+  public enum Lifetime {
+    case prototype
+    case objectGraph
+    case singleton(lazy: Swift.Bool)
+  }
+  public class ScopeOverride {
+    public init(type: Any, factory: @escaping () -> Any)
+    @objc deinit
+  }
+}
+@propertyWrapper public class RWLocked<Value> {
+  public init(wrappedValue: Value, lock: DI.RWLock = .init())
+  public var wrappedValue: Value {
+    get
+    set
+  }
+  public var projectedValue: DI.RWLocked<Value> {
+    get
+  }
+  public func mutate(_ mutation: (inout Value) -> Swift.Void)
+  @objc deinit
+}

@@ -1,0 +1,1033 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "DI",
+    "printedName": "DI",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "DI"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "Assembly",
+        "printedName": "Assembly",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "register",
+            "printedName": "register(lifetime:initCall:injectCall:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Lifetime",
+                "printedName": "DI.Assembly.Lifetime",
+                "hasDefaultArg": true,
+                "usr": "s:2DI8AssemblyC8LifetimeO"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "() -> τ_0_0",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_0_0"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "((τ_0_0) -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(τ_0_0) -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "GenericTypeParam",
+                        "printedName": "τ_0_0"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:2DI8AssemblyC8register8lifetime8initCall06injectF0yAC8LifetimeO_xycyxcSgtlF",
+            "mangledName": "$s2DI8AssemblyC8register8lifetime8initCall06injectF0yAC8LifetimeO_xycyxcSgtlF",
+            "moduleName": "DI",
+            "genericSig": "<τ_0_0>",
+            "sugared_genericSig": "<ComponentType>",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "scopeWith",
+            "printedName": "scopeWith(overrides:scope:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "GenericTypeParam",
+                "printedName": "τ_0_0"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[DI.Assembly.ScopeOverride]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ScopeOverride",
+                    "printedName": "DI.Assembly.ScopeOverride",
+                    "usr": "s:2DI8AssemblyC13ScopeOverrideC"
+                  }
+                ],
+                "usr": "s:Sa"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "() -> τ_0_0",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_0_0"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "typeAttributes": [
+                  "noescape"
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:2DI8AssemblyC9scopeWith9overrides0C0xSayAC13ScopeOverrideCG_xyXEtlF",
+            "mangledName": "$s2DI8AssemblyC9scopeWith9overrides0C0xSayAC13ScopeOverrideCG_xyXEtlF",
+            "moduleName": "DI",
+            "genericSig": "<τ_0_0>",
+            "sugared_genericSig": "<T>",
+            "declAttributes": [
+              "Final",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "unregister",
+            "printedName": "unregister(type:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Metatype",
+                "printedName": "τ_0_0.Type",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_0_0"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:2DI8AssemblyC10unregister4typeyxm_tlF",
+            "mangledName": "$s2DI8AssemblyC10unregister4typeyxm_tlF",
+            "moduleName": "DI",
+            "genericSig": "<τ_0_0>",
+            "sugared_genericSig": "<ComponentType>",
+            "declAttributes": [
+              "Final",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "resolve",
+            "printedName": "resolve()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImplicitlyUnwrappedOptional",
+                "printedName": "τ_0_0?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_0_0"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:2DI8AssemblyC7resolvexSgylF",
+            "mangledName": "$s2DI8AssemblyC7resolvexSgylF",
+            "moduleName": "DI",
+            "genericSig": "<τ_0_0>",
+            "sugared_genericSig": "<ComponentType>",
+            "declAttributes": [
+              "Final",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "resolve",
+            "printedName": "resolve(instance:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ProtocolComposition",
+                "printedName": "Any"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:2DI8AssemblyC7resolve8instanceyyp_tF",
+            "mangledName": "$s2DI8AssemblyC7resolve8instanceyyp_tF",
+            "moduleName": "DI",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Assembly",
+                "printedName": "DI.Assembly",
+                "usr": "c:@M@DI@objc(cs)Assembly"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@DI@objc(cs)Assembly(im)init",
+            "mangledName": "$s2DI8AssemblyCACycfc",
+            "moduleName": "DI",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "Lifetime",
+            "printedName": "Lifetime",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "prototype",
+                "printedName": "prototype",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(DI.Assembly.Lifetime.Type) -> DI.Assembly.Lifetime",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Lifetime",
+                        "printedName": "DI.Assembly.Lifetime",
+                        "usr": "s:2DI8AssemblyC8LifetimeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "DI.Assembly.Lifetime.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Lifetime",
+                            "printedName": "DI.Assembly.Lifetime",
+                            "usr": "s:2DI8AssemblyC8LifetimeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:2DI8AssemblyC8LifetimeO9prototypeyA2EmF",
+                "mangledName": "$s2DI8AssemblyC8LifetimeO9prototypeyA2EmF",
+                "moduleName": "DI",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "objectGraph",
+                "printedName": "objectGraph",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(DI.Assembly.Lifetime.Type) -> DI.Assembly.Lifetime",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Lifetime",
+                        "printedName": "DI.Assembly.Lifetime",
+                        "usr": "s:2DI8AssemblyC8LifetimeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "DI.Assembly.Lifetime.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Lifetime",
+                            "printedName": "DI.Assembly.Lifetime",
+                            "usr": "s:2DI8AssemblyC8LifetimeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:2DI8AssemblyC8LifetimeO11objectGraphyA2EmF",
+                "mangledName": "$s2DI8AssemblyC8LifetimeO11objectGraphyA2EmF",
+                "moduleName": "DI",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "singleton",
+                "printedName": "singleton",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(DI.Assembly.Lifetime.Type) -> (Swift.Bool) -> DI.Assembly.Lifetime",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.Bool) -> DI.Assembly.Lifetime",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Lifetime",
+                            "printedName": "DI.Assembly.Lifetime",
+                            "usr": "s:2DI8AssemblyC8LifetimeO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(lazy: Swift.Bool)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Bool",
+                                "printedName": "Swift.Bool",
+                                "usr": "s:Sb"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "DI.Assembly.Lifetime.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Lifetime",
+                            "printedName": "DI.Assembly.Lifetime",
+                            "usr": "s:2DI8AssemblyC8LifetimeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:2DI8AssemblyC8LifetimeO9singletonyAESb_tcAEmF",
+                "mangledName": "$s2DI8AssemblyC8LifetimeO9singletonyAESb_tcAEmF",
+                "moduleName": "DI",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:2DI8AssemblyC8LifetimeO",
+            "mangledName": "$s2DI8AssemblyC8LifetimeO",
+            "moduleName": "DI",
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "ScopeOverride",
+            "printedName": "ScopeOverride",
+            "children": [
+              {
+                "kind": "Constructor",
+                "name": "init",
+                "printedName": "init(type:factory:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ScopeOverride",
+                    "printedName": "DI.Assembly.ScopeOverride",
+                    "usr": "s:2DI8AssemblyC13ScopeOverrideC"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  },
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> Any",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "Constructor",
+                "usr": "s:2DI8AssemblyC13ScopeOverrideC4type7factoryAEyp_ypyctcfc",
+                "mangledName": "$s2DI8AssemblyC13ScopeOverrideC4type7factoryAEyp_ypyctcfc",
+                "moduleName": "DI",
+                "declAttributes": [
+                  "AccessControl"
+                ],
+                "init_kind": "Designated"
+              }
+            ],
+            "declKind": "Class",
+            "usr": "s:2DI8AssemblyC13ScopeOverrideC",
+            "mangledName": "$s2DI8AssemblyC13ScopeOverrideC",
+            "moduleName": "DI",
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@DI@objc(cs)Assembly",
+        "mangledName": "$s2DI8AssemblyC",
+        "moduleName": "DI",
+        "isOpen": true,
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "RWLocked",
+        "printedName": "RWLocked",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(wrappedValue:lock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "RWLocked",
+                "printedName": "DI.RWLocked<τ_0_0>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_0_0"
+                  }
+                ],
+                "usr": "s:2DI8RWLockedC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "GenericTypeParam",
+                "printedName": "τ_0_0"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "RWLock",
+                "printedName": "DI.RWLock",
+                "hasDefaultArg": true,
+                "usr": "s:2DI6RWLockC"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:2DI8RWLockedC12wrappedValue4lockACyxGx_AA6RWLockCtcfc",
+            "mangledName": "$s2DI8RWLockedC12wrappedValue4lockACyxGx_AA6RWLockCtcfc",
+            "moduleName": "DI",
+            "genericSig": "<τ_0_0>",
+            "sugared_genericSig": "<Value>",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "wrappedValue",
+            "printedName": "wrappedValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "GenericTypeParam",
+                "printedName": "τ_0_0"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:2DI8RWLockedC12wrappedValuexvp",
+            "mangledName": "$s2DI8RWLockedC12wrappedValuexvp",
+            "moduleName": "DI",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_0_0"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:2DI8RWLockedC12wrappedValuexvg",
+                "mangledName": "$s2DI8RWLockedC12wrappedValuexvg",
+                "moduleName": "DI",
+                "genericSig": "<τ_0_0>",
+                "sugared_genericSig": "<Value>",
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_0_0"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:2DI8RWLockedC12wrappedValuexvs",
+                "mangledName": "$s2DI8RWLockedC12wrappedValuexvs",
+                "moduleName": "DI",
+                "genericSig": "<τ_0_0>",
+                "sugared_genericSig": "<Value>",
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:2DI8RWLockedC12wrappedValuexvM",
+                "mangledName": "$s2DI8RWLockedC12wrappedValuexvM",
+                "moduleName": "DI",
+                "genericSig": "<τ_0_0>",
+                "sugared_genericSig": "<Value>",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "projectedValue",
+            "printedName": "projectedValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "RWLocked",
+                "printedName": "DI.RWLocked<τ_0_0>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_0_0"
+                  }
+                ],
+                "usr": "s:2DI8RWLockedC"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:2DI8RWLockedC14projectedValueACyxGvp",
+            "mangledName": "$s2DI8RWLockedC14projectedValueACyxGvp",
+            "moduleName": "DI",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "RWLocked",
+                    "printedName": "DI.RWLocked<τ_0_0>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "GenericTypeParam",
+                        "printedName": "τ_0_0"
+                      }
+                    ],
+                    "usr": "s:2DI8RWLockedC"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:2DI8RWLockedC14projectedValueACyxGvg",
+                "mangledName": "$s2DI8RWLockedC14projectedValueACyxGvg",
+                "moduleName": "DI",
+                "genericSig": "<τ_0_0>",
+                "sugared_genericSig": "<Value>",
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "mutate",
+            "printedName": "mutate(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(inout τ_0_0) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_0_0"
+                  }
+                ],
+                "typeAttributes": [
+                  "noescape"
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:2DI8RWLockedC6mutateyyyxzXEF",
+            "mangledName": "$s2DI8RWLockedC6mutateyyyxzXEF",
+            "moduleName": "DI",
+            "genericSig": "<τ_0_0>",
+            "sugared_genericSig": "<Value>",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:2DI8RWLockedC",
+        "mangledName": "$s2DI8RWLockedC",
+        "moduleName": "DI",
+        "genericSig": "<τ_0_0>",
+        "sugared_genericSig": "<Value>",
+        "declAttributes": [
+          "AccessControl",
+          "PropertyWrapper"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "DI"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "RWLock",
+        "printedName": "RWLock",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "RWLock",
+                "printedName": "DI.RWLock",
+                "usr": "s:2DI6RWLockC"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:2DI6RWLockCACycfc",
+            "mangledName": "$s2DI6RWLockCACycfc",
+            "moduleName": "DI",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "lockReading",
+            "printedName": "lockReading()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:2DI6RWLockC11lockReadingyyF",
+            "mangledName": "$s2DI6RWLockC11lockReadingyyF",
+            "moduleName": "DI",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "lockWriting",
+            "printedName": "lockWriting()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:2DI6RWLockC11lockWritingyyF",
+            "mangledName": "$s2DI6RWLockC11lockWritingyyF",
+            "moduleName": "DI",
+            "declAttributes": [
+              "Final",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "unlock",
+            "printedName": "unlock()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:2DI6RWLockC6unlockyyF",
+            "mangledName": "$s2DI6RWLockC6unlockyyF",
+            "moduleName": "DI",
+            "declAttributes": [
+              "Final",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:2DI6RWLockC",
+        "mangledName": "$s2DI6RWLockC",
+        "moduleName": "DI",
+        "declAttributes": [
+          "Final",
+          "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/daniilshlapak\/Documents\/DI\/DI\/Assembly.swift",
+      "kind": "Array",
+      "offset": 162,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/daniilshlapak\/Documents\/DI\/DI\/Assembly.swift",
+      "kind": "Dictionary",
+      "offset": 222,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/daniilshlapak\/Documents\/DI\/DI\/Assembly.swift",
+      "kind": "Dictionary",
+      "offset": 291,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/daniilshlapak\/Documents\/DI\/DI\/Assembly.swift",
+      "kind": "Array",
+      "offset": 333,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/daniilshlapak\/Documents\/DI\/DI\/Assembly.swift",
+      "kind": "IntegerLiteral",
+      "offset": 376,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/daniilshlapak\/Documents\/DI\/DI\/Assembly.swift",
+      "kind": "Dictionary",
+      "offset": 447,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/daniilshlapak\/Documents\/DI\/DI\/Assembly.swift",
+      "kind": "Dictionary",
+      "offset": 526,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/daniilshlapak\/Documents\/DI\/DI\/Assembly.swift",
+      "kind": "BooleanLiteral",
+      "offset": 647,
+      "length": 4,
+      "value": "true"
+    }
+  ]
+}
