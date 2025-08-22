@@ -84,7 +84,6 @@ class ProductGalleryView: UIView, UIScrollViewDelegate {
 
     // MARK: - Configuration
     func configure(with product: ProductDetail) {
-        // Cancel ongoing image loads and remove views
         imageViews.forEach { 
             $0.cancelImageLoad()
             $0.removeFromSuperview() 

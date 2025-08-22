@@ -5,10 +5,8 @@ extension UIImageView {
     func loadImage(from url: URL, placeholder: UIImage? = nil, context: String = "unknown") {
         let startTime = PerformanceTimestamp.now()
         
-        // Set default placeholder
         let placeholderImage = placeholder ?? UIImage(systemName: "photo")
         
-        // Configure placeholder appearance
         if placeholder == nil {
             self.backgroundColor = UIColor.systemGray6
             self.tintColor = .gray
@@ -23,7 +21,6 @@ extension UIImageView {
                 let endTime = PerformanceTimestamp.now()
                 let loadTime = endTime.elapsed(since: startTime)
                 
-                // Record performance metrics
                 PerformanceMetricManager.shared.recordMetric(
                     name: "image_load_time",
                     value: loadTime,
@@ -35,7 +32,6 @@ extension UIImageView {
                     ]
                 )
                 
-                // Configure appearance after successful load
                 if error == nil && image != nil {
                     self?.backgroundColor = .clear
                     self?.tintColor = nil

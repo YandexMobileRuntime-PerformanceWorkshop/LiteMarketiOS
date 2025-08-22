@@ -11,7 +11,6 @@ final class ProductCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        // Cancel any ongoing image loading
         imageView.cancelImageLoad()
         imageView.image = nil
         titleLabel.text = nil

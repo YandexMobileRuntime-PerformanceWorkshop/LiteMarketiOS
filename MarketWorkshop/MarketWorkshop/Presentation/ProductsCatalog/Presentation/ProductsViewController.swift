@@ -269,16 +269,10 @@ extension ProductsViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: collectionView.bounds.width - 32, height: 80)
         }
         
-        let fibonacci = calculateFibonacci(30)
         let width = (view.frame.width - 48) / 2
-        let height = width * 4/3 + 60 + CGFloat(fibonacci % 10)
+        let height = width * 4/3 + 60
         
         return CGSize(width: width, height: height)
-    }
-
-    func calculateFibonacci(_ n: Int) -> Int {
-        if n <= 1 { return n }
-        return calculateFibonacci(n-1) + calculateFibonacci(n-2)
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

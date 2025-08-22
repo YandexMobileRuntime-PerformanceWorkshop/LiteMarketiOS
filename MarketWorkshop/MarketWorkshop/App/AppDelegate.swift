@@ -11,28 +11,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - SDWebImage Configuration
     private func configureSDWebImage() {
-        // Configure memory cache limit (50 MB)
         SDImageCache.shared.config.maxMemoryCost = 50 * 1024 * 1024
         
-        // Configure disk cache limit (200 MB)
         SDImageCache.shared.config.maxDiskSize = 200 * 1024 * 1024
         
-        // Cache for 1 week
         SDImageCache.shared.config.maxDiskAge = 60 * 60 * 24 * 7
         
-        // Enable memory caching
         SDImageCache.shared.config.shouldCacheImagesInMemory = true
         
-        // Configure downloader for optimal performance
         SDWebImageDownloader.shared.config.downloadTimeout = 30
         SDWebImageDownloader.shared.config.maxConcurrentDownloads = 6
                 
-        // Configure options for better performance
         SDWebImageManager.shared.optionsProcessor = SDWebImageOptionsProcessor { url, options, context in
             var newOptions = options
-            // Enable scale down for large images to save memory
             newOptions.insert(.scaleDownLargeImages)
-            // Enable progressive loading for better UX
             newOptions.insert(.progressiveLoad)
             return SDWebImageOptionsResult(options: newOptions, context: context)
         }
