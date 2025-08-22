@@ -21,7 +21,7 @@ final class ProductsService: ProductsServiceProtocol {
     private var currentPage = 1
     private var hasMorePages = true
     private var isLoading = false
-    private let itemsPerPage = 100
+    private let itemsPerPage = 12
 
     init(repository: ProductsRepositoryProtocol) {
         self.repository = repository
