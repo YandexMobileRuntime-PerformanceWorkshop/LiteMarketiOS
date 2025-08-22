@@ -11,10 +11,10 @@ final class ProductCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        imageView.cancelImageLoad()
         imageView.image = nil
         titleLabel.text = nil
         priceLabel.text = nil
+        imageView.cancelImageLoad()
     }
 
     override init(frame: CGRect) {
