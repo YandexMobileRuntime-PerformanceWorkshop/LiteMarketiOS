@@ -316,8 +316,11 @@ extension ProductsViewController: UICollectionViewDelegateFlowLayout {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         let frameHeight = scrollView.frame.size.height
-        
-        if offsetY > contentHeight - frameHeight - 40 {
+
+        let itemWidth = (view.frame.width - 48) / 2
+        let itemHeight = itemWidth * 4/3 + 60
+
+        if offsetY > contentHeight - frameHeight - itemHeight * 2 {
             presenter.loadNextPageIfNeeded()
         }
     }
