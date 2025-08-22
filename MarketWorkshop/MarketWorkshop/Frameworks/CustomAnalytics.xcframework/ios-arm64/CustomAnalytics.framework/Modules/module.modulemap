@@ -1,0 +1,6 @@
+framework module CustomAnalytics {
+  umbrella header "CustomAnalytics.h"
+  export *
+
+  module * { export * }
+}
