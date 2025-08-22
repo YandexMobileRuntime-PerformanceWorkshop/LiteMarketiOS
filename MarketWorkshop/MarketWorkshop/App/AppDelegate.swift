@@ -1,11 +1,9 @@
 import UIKit
-import CustomAnalytics
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         StartupTimeLogger.recordStartupTime()
-        CustomAnalyticsManager.configure()
-
         return true
     }
 

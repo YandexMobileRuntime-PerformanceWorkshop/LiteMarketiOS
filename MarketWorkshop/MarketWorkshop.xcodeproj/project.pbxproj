@@ -44,25 +44,11 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		8EBFA7F92E53249E00B7113B /* Exceptions for "MarketWorkshop" folder in "Embed Frameworks" phase from "MarketWorkshop" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			attributesByRelativePath = {
-				Frameworks/CustomAnalytics.xcframework = (CodeSignOnCopy, RemoveHeadersOnCopy, );
-			};
-			buildPhase = 8E8C9C052E4480C200CB0B7A /* Embed Frameworks */;
-			membershipExceptions = (
-				Frameworks/CustomAnalytics.xcframework,
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8E3AE9EF2E33D09A00CAD7B5 /* MarketWorkshop */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				8E3AE9FF2E33D09B00CAD7B5 /* Exceptions for "MarketWorkshop" folder in "MarketWorkshop" target */,
-				8EBFA7F92E53249E00B7113B /* Exceptions for "MarketWorkshop" folder in "Embed Frameworks" phase from "MarketWorkshop" target */,
 			);
 			path = MarketWorkshop;
 			sourceTree = "<group>";
