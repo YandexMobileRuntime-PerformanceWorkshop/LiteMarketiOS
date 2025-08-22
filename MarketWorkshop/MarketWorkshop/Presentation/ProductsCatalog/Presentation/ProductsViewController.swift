@@ -289,7 +289,7 @@ extension ProductsViewController: UICollectionViewDelegateFlowLayout {
         let mviScreenAnalytics = MVIScreenAnalytics(creationTime: .fromScreenCreation(timestamp: .now()))
         let selectedProduct = products[indexPath.item]
 
-        sendAnalytics(for: selectedProduct, at: indexPath)
+        presenter.sendAnalytics(for: selectedProduct, at: indexPath)
 
         let detailVC = productDetailsAssembly.createProductDetailsModule(
             for: selectedProduct.id,
@@ -299,26 +299,7 @@ extension ProductsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     // MARK: - Synchronous Analytics
-    private func sendAnalytics(for product: Product, at indexPath: IndexPath) {
-        var payload: [String: Any] = [
-            "event": "product_open",
-            "product_id": product.id,
-            "timestamp": Date().timeIntervalSince1970,
-            "position": ["row": indexPath.item / 2, "column": indexPath.item % 2],
-            "title_length": product.title.count
-        ]
-        var interactions: [[String: Any]] = []
-        for i in 0..<150 {
-            interactions.append([
-                "offset": i * 5,
-                "velocity": Double.random(in: 0...3),
-                "direction": i % 2 == 0 ? "down" : "up"
-            ])
-        }
-        payload["interactions"] = interactions
-        
-        AnalyticsManager.send(event: "product_open", payload: payload)
-    }
+
 
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         performanceManager.start(measureName: "catalog_scroll")

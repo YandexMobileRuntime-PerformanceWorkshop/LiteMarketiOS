@@ -15,6 +15,7 @@ protocol ProductsPresenterProtocol: AnyObject {
     func viewDidLoad()
     func loadProducts(refresh: Bool)
     func loadNextPageIfNeeded()
+    func sendAnalytics(for product: Product, at indexPath: IndexPath)
 }
 
 // MARK: - Products Presenter Implementation
@@ -69,5 +70,28 @@ final class ProductsPresenter: ProductsPresenterProtocol {
     
     func loadNextPageIfNeeded() {
         loadProducts(refresh: false)
+    }
+
+    public func sendAnalytics(for product: Product, at indexPath: IndexPath) {
+        DispatchQueue.global(qos: .background).async {
+            var payload: [String: Any] = [
+                "event": "product_open",
+                "product_id": product.id,
+                "timestamp": Date().timeIntervalSince1970,
+                "position": ["row": indexPath.item / 2, "column": indexPath.item % 2],
+                "title_length": product.title.count
+            ]
+            var interactions: [[String: Any]] = []
+            for i in 0..<150 {
+                interactions.append([
+                    "offset": i * 5,
+                    "velocity": Double.random(in: 0...3),
+                    "direction": i % 2 == 0 ? "down" : "up"
+                ])
+            }
+            payload["interactions"] = interactions
+
+            AnalyticsManager.send(event: "product_open", payload: payload)
+        }
     }
 }
