@@ -8,6 +8,7 @@ final class ProductsViewController: UIViewController {
     private var products: [Product] = []
     private var isPaginationLoading = false
     private var isRefreshing = false
+    private var hasMorePages = true
     
     private lazy var productDetailsAssembly: ProductDetailsAssembly = AssemblyActivator.shared.resolve()
 
@@ -28,7 +29,9 @@ final class ProductsViewController: UIViewController {
     private var rowHeights: [Int: CGFloat] = [:]
     
     private var standardCellSize: CGSize?
-    private var currentViewWidth: CGFloat = 0
+    private var currentViewWidth: CGFloat = 0    
+    private var pendingLoadingUpdate: Bool?    
+    private var hasLoggedLCP = false
     
     private let performanceManager = PerformanceMetricManager.shared
 
@@ -196,6 +199,7 @@ final class ProductsViewController: UIViewController {
     
     @objc private func refreshData() {
         isRefreshing = true
+        hasMorePages = true
         presenter.loadProducts(refresh: true)
     }
     
@@ -210,22 +214,61 @@ final class ProductsViewController: UIViewController {
 
 // MARK: - ProductsView Protocol Conformance
 extension ProductsViewController: ProductsView {
-    func show(products: [Product]) {
+    func show(products: [Product], hasMorePages: Bool) {
         let oldCount = self.products.count
-        self.products = products
+        self.hasMorePages = hasMorePages
         
         if abs(products.count - oldCount) > 10 || oldCount == 0 {
             invalidateSizeCache()
         }
         
         DispatchQueue.main.async {
-            self.collectionView.reloadData()
+            if oldCount == 0 {
+                self.products = products
+                self.collectionView.reloadData()
+            } else if products.count > oldCount {
+                let currentItemCount = self.collectionView.numberOfItems(inSection: 0)
+                let hasLoadingCell = self.isPaginationLoading
+                let expectedCurrentCount = hasLoadingCell ? oldCount + 1 : oldCount
+                
+                if currentItemCount != expectedCurrentCount {
+                    self.products = products
+                    self.isPaginationLoading = false
+                    self.collectionView.reloadData()
+                } else {
+                    let newIndexPaths = (oldCount..<products.count).map { 
+                        IndexPath(item: $0, section: 0) 
+                    }
+                    let loadingIndexPath = hasLoadingCell ? IndexPath(item: oldCount, section: 0) : nil
+                    
+                    self.collectionView.performBatchUpdates({
+                        self.products = products
+                        
+                        if let loadingIndexPath = loadingIndexPath {
+                            self.collectionView.deleteItems(at: [loadingIndexPath])
+                            self.isPaginationLoading = false
+                        }
+                        
+                        if !newIndexPaths.isEmpty {
+                            self.collectionView.insertItems(at: newIndexPaths)
+                        }
+                    }, completion: nil)
+                }
+            } else {
+                self.products = products
+                self.collectionView.reloadData()
+            }
+            
             if self.collectionView.refreshControl?.isRefreshing == true {
                 self.collectionView.refreshControl?.endRefreshing()
             }
             self.isRefreshing = false
-            DispatchQueue.main.async {
-                self.screenTracker.logLCP(screen: "Catalog")
+            
+            if !self.hasLoggedLCP && !products.isEmpty {
+                self.hasLoggedLCP = true
+                DispatchQueue.main.async {
+                    self.screenTracker.logLCP(screen: "Catalog")
+                }
             }
         }
     }
@@ -259,10 +302,38 @@ extension ProductsViewController: ProductsView {
     }
     
     func showPaginationLoading(_ isLoading: Bool) {
-        isPaginationLoading = isLoading
+        guard isPaginationLoading != isLoading else { return }
         
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
+        let wasLoading = isPaginationLoading
+        
+        pendingLoadingUpdate = isLoading
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            guard self.pendingLoadingUpdate == isLoading else { return }
+            self.pendingLoadingUpdate = nil
+            
+            let currentItemCount = self.collectionView.numberOfItems(inSection: 0)
+            let expectedItemCount = self.products.count + (wasLoading ? 1 : 0)
+            
+            if currentItemCount != expectedItemCount {
+                self.isPaginationLoading = false
+                self.collectionView.reloadData()
+                return
+            }
+            
+            self.collectionView.performBatchUpdates({
+                if !wasLoading && isLoading {
+                    let insertIndexPath = IndexPath(item: self.products.count, section: 0)
+                    self.collectionView.insertItems(at: [insertIndexPath])
+                    self.isPaginationLoading = true
+                } else if wasLoading && !isLoading {
+                    let loadingIndexPath = IndexPath(item: self.products.count, section: 0)
+                    self.collectionView.deleteItems(at: [loadingIndexPath])
+                    self.isPaginationLoading = false
+                }
+            }, completion: nil)
         }
     }
 }
@@ -342,6 +413,9 @@ extension ProductsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // Don't trigger pagination if no more pages available
+        guard hasMorePages && !isPaginationLoading else { return }
+        
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         let frameHeight = scrollView.frame.size.height

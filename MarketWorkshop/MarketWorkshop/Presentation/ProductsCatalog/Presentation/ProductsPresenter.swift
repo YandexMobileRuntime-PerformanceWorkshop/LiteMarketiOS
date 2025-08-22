@@ -2,7 +2,7 @@ import Foundation
 
 // MARK: - Products View Protocol
 protocol ProductsView: AnyObject {
-    func show(products: [Product])
+    func show(products: [Product], hasMorePages: Bool)
     func showError(_ error: Error)
     func showLoading(_ isLoading: Bool)
     func showPaginationLoading(_ isLoading: Bool)
@@ -22,6 +22,7 @@ protocol ProductsPresenterProtocol: AnyObject {
 final class ProductsPresenter: ProductsPresenterProtocol {
     weak var view: ProductsView?
     private let service: ProductsServiceProtocol
+    private var hasMorePages = true
     
     init(service: ProductsServiceProtocol) {
         self.service = service
@@ -36,6 +37,7 @@ final class ProductsPresenter: ProductsPresenterProtocol {
         guard !service.isCurrentlyLoading() else { return }
         
         if refresh {
+            hasMorePages = true
             view?.showLoading(true)
         } else {
             view?.showPaginationLoading(true)
@@ -52,7 +54,9 @@ final class ProductsPresenter: ProductsPresenterProtocol {
                         self.view?.showPaginationLoading(false)
                     }
                     
-                    self.view?.show(products: result.products)
+                    self.hasMorePages = result.hasMorePages
+                    
+                    self.view?.show(products: result.products, hasMorePages: result.hasMorePages)
                 }
             } catch {
                 await MainActor.run {
@@ -69,6 +73,8 @@ final class ProductsPresenter: ProductsPresenterProtocol {
     }
     
     func loadNextPageIfNeeded() {
+        guard hasMorePages else { return }
+        
         loadProducts(refresh: false)
     }
 
