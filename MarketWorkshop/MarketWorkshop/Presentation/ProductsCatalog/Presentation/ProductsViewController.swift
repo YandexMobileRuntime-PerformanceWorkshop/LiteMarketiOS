@@ -79,9 +79,7 @@ final class ProductsViewController: UIViewController {
 
         collectionView.dataSource = self
         collectionView.delegate = self
-        for i in 0..<200 {
-            collectionView.register(ProductCell.self, forCellWithReuseIdentifier: "ProductCell_\(i)")
-        }
+        collectionView.register(ProductCell.self, forCellWithReuseIdentifier: ProductCell.reuseIdentifier)
         collectionView.register(LoadingCell.self, forCellWithReuseIdentifier: LoadingCell.reuseIdentifier)
         collectionView.register(ProductSkeletonCell.self, forCellWithReuseIdentifier: ProductSkeletonCell.reuseIdentifier)
         
@@ -258,8 +256,7 @@ extension ProductsViewController: UICollectionViewDataSource {
             return cell
         }
 
-        let uniqueIdentifier = "ProductCell_\(indexPath.item)"
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: uniqueIdentifier, for: indexPath) as! ProductCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.reuseIdentifier, for: indexPath) as! ProductCell
         cell.configure(with: products[indexPath.item])
         return cell
     }
