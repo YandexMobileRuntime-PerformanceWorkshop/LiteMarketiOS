@@ -1,4 +1,5 @@
 import UIKit
+import SDWebImage
 
 final class ProductCell: UICollectionViewCell {
     static let reuseIdentifier = "ProductCell"
@@ -10,16 +11,11 @@ final class ProductCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
+        // Cancel any ongoing image loading
+        imageView.cancelImageLoad()
         imageView.image = nil
-
-        titleLabel.removeFromSuperview()
-        let newTitleLabel = UILabel()
-        newTitleLabel.numberOfLines = 2
-        newTitleLabel.font = .systemFont(ofSize: 15, weight: .regular)
-        contentView.addSubview(newTitleLabel)
-
+        titleLabel.text = nil
         priceLabel.text = nil
-        favoriteButton.setImage(nil, for: .normal)
     }
 
     override init(frame: CGRect) {
@@ -79,18 +75,6 @@ final class ProductCell: UICollectionViewCell {
     }
 
     func configure(with product: Product) {
-        imageView.removeFromSuperview()
-        titleLabel.removeFromSuperview()
-        priceLabel.removeFromSuperview()
-        favoriteButton.removeFromSuperview()
-
-        [imageView, titleLabel, priceLabel, favoriteButton].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview($0)
-        }
-
-        setupLayout()
-
         titleLabel.text = product.title
         priceLabel.text = product.price
 

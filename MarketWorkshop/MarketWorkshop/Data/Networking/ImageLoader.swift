@@ -1,49 +1,52 @@
 import UIKit
+import SDWebImage
 
 extension UIImageView {
     func loadImage(from url: URL, placeholder: UIImage? = nil, context: String = "unknown") {
         let startTime = PerformanceTimestamp.now()
         
-        if let placeholder = placeholder {
-            self.image = placeholder
-        } else {
+        // Set default placeholder
+        let placeholderImage = placeholder ?? UIImage(systemName: "photo")
+        
+        // Configure placeholder appearance
+        if placeholder == nil {
             self.backgroundColor = UIColor.systemGray6
-            self.image = UIImage(systemName: "photo")
             self.tintColor = .gray
             self.contentMode = .center
         }
         
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            guard let data = data,
-                  let image = UIImage(data: data),
-                  error == nil else { 
+        self.sd_setImage(
+            with: url,
+            placeholderImage: placeholderImage,
+            options: [.progressiveLoad, .retryFailed, .scaleDownLargeImages],
+            completed: { [weak self] image, error, cacheType, imageURL in
                 let endTime = PerformanceTimestamp.now()
                 let loadTime = endTime.elapsed(since: startTime)
-                PerformanceMetricManager.shared.recordMetric(
-                    name: "image_load_time",
-                    value: loadTime,
-                    context: ["url": url.absoluteString, "context": context, "status": "failed"]
-                )
-                return 
-            }
-
-            DispatchQueue.main.async {
-                guard let strongSelf = self else { return }
-
-                let endTime = PerformanceTimestamp.now()
-                let loadTime = endTime.elapsed(since: startTime)
-
-                strongSelf.image = image
-                strongSelf.backgroundColor = .clear
-                strongSelf.tintColor = nil
-                strongSelf.contentMode = .scaleAspectFill
                 
+                // Record performance metrics
                 PerformanceMetricManager.shared.recordMetric(
                     name: "image_load_time",
                     value: loadTime,
-                    context: ["url": url.absoluteString, "context": context, "status": "success"]
+                    context: [
+                        "url": url.absoluteString,
+                        "context": context,
+                        "status": error == nil ? "success" : "failed",
+                        "cache_type": cacheType.rawValue
+                    ]
                 )
+                
+                // Configure appearance after successful load
+                if error == nil && image != nil {
+                    self?.backgroundColor = .clear
+                    self?.tintColor = nil
+                    self?.contentMode = .scaleAspectFill
+                }
             }
-        }.resume()
+        )
+    }
+    
+    /// Cancel any ongoing image loading operation
+    func cancelImageLoad() {
+        sd_cancelCurrentImageLoad()
     }
 }

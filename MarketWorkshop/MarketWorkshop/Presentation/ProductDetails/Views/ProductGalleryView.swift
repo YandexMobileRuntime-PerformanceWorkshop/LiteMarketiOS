@@ -1,4 +1,5 @@
 import UIKit
+import SDWebImage
 
 class ProductGalleryView: UIView, UIScrollViewDelegate {
     // MARK: - UI Components
@@ -83,7 +84,11 @@ class ProductGalleryView: UIView, UIScrollViewDelegate {
 
     // MARK: - Configuration
     func configure(with product: ProductDetail) {
-        imageViews.forEach { $0.removeFromSuperview() }
+        // Cancel ongoing image loads and remove views
+        imageViews.forEach { 
+            $0.cancelImageLoad()
+            $0.removeFromSuperview() 
+        }
         imageViews.removeAll()
 
         let images = product.images.isEmpty ? [""] : product.images
